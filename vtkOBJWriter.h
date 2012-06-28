@@ -16,7 +16,6 @@
  *
  *=========================================================================*/
 
-
 // .NAME vtkOBJWriter - write a Wavefront OBJ file.
 // .SECTION Description
 
@@ -36,7 +35,7 @@ public:
   // Specify the name of the file to write out.
   vtkSetStringMacro(FileName);
   vtkGetStringMacro(FileName);
-  
+
   int RequestData(vtkInformation *, vtkInformationVector **, vtkInformationVector *);
 
 protected:
@@ -46,9 +45,8 @@ protected:
 private:
   vtkOBJWriter(const vtkOBJWriter&);  // Not implemented.
   void operator=(const vtkOBJWriter&);  // Not implemented.
-  
-  char *FileName;
 
+  char *FileName;
 };
 
 #endif
