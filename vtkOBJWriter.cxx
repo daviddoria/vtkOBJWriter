@@ -16,6 +16,16 @@
  *
  *=========================================================================*/
 
+/*=========================================================================
+  Copyright (c) Ken Martin, Will Schroeder, Bill Lorensen
+  All rights reserved.
+  See Copyright.txt or http://www.kitware.com/Copyright.htm for details.
+
+     This software is distributed WITHOUT ANY WARRANTY; without even
+     the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+     PURPOSE.  See the above copyright notice for more information.
+=========================================================================*/
+
 #include "vtkOBJWriter.h"
 
 #include "vtkActorCollection.h"
@@ -42,7 +52,7 @@ vtkStandardNewMacro(vtkOBJWriter);
 vtkOBJWriter::vtkOBJWriter()
 {
   this->FileName = NULL;
-  
+
   this->SetNumberOfInputPorts(1);
   this->SetNumberOfOutputPorts(0);
 
@@ -60,20 +70,20 @@ int vtkOBJWriter::RequestData(vtkInformation *vtkNotUsed(request),
                                vtkInformationVector **inputVector,
                                vtkInformationVector *vtkNotUsed(outputVector))
 {
-  
+
   //Get the input
   vtkInformation *inInfo = inputVector[0]->GetInformationObject(0);
   vtkPolyData *pd = vtkPolyData::SafeDownCast(
     inInfo->Get(vtkDataObject::DATA_OBJECT()));
-  
+
   //open the file for writing
   std::ofstream fout(this->FileName);
-  
+
   //write header
   fout << "# wavefront obj file written by the visualization toolkit" << endl << endl;
-  
+
   fout << "mtllib NONE" << endl << endl;
-  
+
   vtkSmartPointer<vtkPointData> pntData;
   vtkSmartPointer<vtkPoints> points;
   vtkSmartPointer<vtkDataArray> tcoords;
@@ -84,18 +94,18 @@ int vtkOBJWriter::RequestData(vtkInformation *vtkNotUsed(request),
   vtkCellArray *cells;
   vtkIdType npts = 0;
   vtkIdType *indx = 0;
-  
+
   // write out the points
   for (i = 0; i < pd->GetNumberOfPoints(); i++)
     {
     pd->GetPoint(i, p);
     fout << "v " << p[0] << " " << p[1] << " " << p[2] << endl;
     }
-    
+
   idNext = idStart + static_cast<int>(pd->GetNumberOfPoints());
-  
+
   // write out the point data
-  
+
   vtkSmartPointer<vtkDataArray> normals = pd->GetPointData()->GetNormals();
   if(normals)
     {
@@ -105,7 +115,7 @@ int vtkOBJWriter::RequestData(vtkInformation *vtkNotUsed(request),
         fout << "vn " << p[0] << " " << p[1] << " " << p[2] << endl;
         }
     }
-  
+
   tcoords = pd->GetPointData()->GetTCoords();
   if (tcoords)
     {
@@ -115,11 +125,11 @@ int vtkOBJWriter::RequestData(vtkInformation *vtkNotUsed(request),
       fout << "vt " << p[0] << " " << p[1] << endl;
       }
     }
-  
+
   // write out a group name and material
   fout << endl << "g grp" << idStart << endl;
   fout << "usemtl mtlNONE" << endl;
-  
+
   // write out verts if any
   if (pd->GetNumberOfVerts() > 0)
     {
@@ -134,7 +144,7 @@ int vtkOBJWriter::RequestData(vtkInformation *vtkNotUsed(request),
         fout << endl;
       }
     }
-  
+
   // write out lines if any
   if (pd->GetNumberOfLines() > 0)
     {
@@ -159,7 +169,7 @@ int vtkOBJWriter::RequestData(vtkInformation *vtkNotUsed(request),
         fout << endl;
       }
     }
-  
+
   // write out polys if any
   if (pd->GetNumberOfPolys() > 0)
     {
@@ -195,7 +205,7 @@ int vtkOBJWriter::RequestData(vtkInformation *vtkNotUsed(request),
         fout << endl;
       }
     }
-  
+
   // write out tstrips if any
   if (pd->GetNumberOfStrips() > 0)
     {
@@ -245,7 +255,7 @@ int vtkOBJWriter::RequestData(vtkInformation *vtkNotUsed(request),
         }
       }
     }
-  
+
   idStart = idNext;
 
 }
@@ -254,14 +264,14 @@ int vtkOBJWriter::RequestData(vtkInformation *vtkNotUsed(request),
 void vtkOBJWriter::PrintSelf(ostream& os, vtkIndent indent)
 {
   this->Superclass::PrintSelf(os,indent);
- 
+
   if (this->FileName)
     {
     os << indent << "FileName: " << this->FileName << "\n";
     }
   else
     {
-    os << indent << "FileName: (null)\n";      
+    os << indent << "FileName: (null)\n";
     }
 }
 
