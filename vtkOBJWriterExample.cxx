@@ -8,10 +8,10 @@
 int main (int argc, char *argv[])
 {
   vtkSmartPointer<vtkPolyData> input;
-  vtkstd::string outputFilename;
-  
-  //Verify command line arguments
-  if(argc > 1) //use the command line arguments
+  std::string outputFilename;
+
+  // Verify command line arguments
+  if(argc > 1) // Use the command line arguments
     {
     if(argc != 3)
       {
@@ -26,7 +26,6 @@ int main (int argc, char *argv[])
     input->ShallowCopy(reader->GetOutput());
 
     outputFilename = argv[2];
-  
     }
   else
     {
@@ -36,12 +35,12 @@ int main (int argc, char *argv[])
     sphereSource->Update();
     input->ShallowCopy(sphereSource->GetOutput());
     }
-  
+
   vtkSmartPointer<vtkOBJWriter> writer = 
       vtkSmartPointer<vtkOBJWriter>::New();
   writer->SetInputData(input);
   writer->SetFileName(outputFilename.c_str());
   writer->Update();
-  
+
   return EXIT_SUCCESS;
 }

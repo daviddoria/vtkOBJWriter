@@ -10,7 +10,7 @@ class vtkOBJWriter : public vtkPolyDataAlgorithm
 {
 public:
   static vtkOBJWriter *New();
-  vtkTypeRevisionMacro(vtkOBJWriter,vtkPolyDataAlgorithm);
+  vtkTypeMacro(vtkOBJWriter,vtkPolyDataAlgorithm);
   void PrintSelf(ostream& os, vtkIndent indent);
 
   // Description:
