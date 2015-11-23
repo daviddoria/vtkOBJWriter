@@ -55,7 +55,6 @@ vtkOBJWriter::vtkOBJWriter()
 
   this->SetNumberOfInputPorts(1);
   this->SetNumberOfOutputPorts(0);
-
 }
 
 vtkOBJWriter::~vtkOBJWriter()
@@ -89,7 +88,6 @@ int vtkOBJWriter::RequestData(vtkInformation *vtkNotUsed(request),
   vtkSmartPointer<vtkDataArray> tcoords;
   int i, i1, i2, idNext;
   int idStart = 1;
-  double *tempd;
   double p[3];
   vtkCellArray *cells;
   vtkIdType npts = 0;
@@ -258,12 +256,12 @@ int vtkOBJWriter::RequestData(vtkInformation *vtkNotUsed(request),
 
   idStart = idNext;
 
+  return 1;
 }
-
 
 void vtkOBJWriter::PrintSelf(ostream& os, vtkIndent indent)
 {
-  this->Superclass::PrintSelf(os,indent);
+  this->Superclass::PrintSelf(os, indent);
 
   if (this->FileName)
     {
@@ -274,4 +272,3 @@ void vtkOBJWriter::PrintSelf(ostream& os, vtkIndent indent)
     os << indent << "FileName: (null)\n";
     }
 }
-
