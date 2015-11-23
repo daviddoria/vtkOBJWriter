@@ -25,7 +25,8 @@
 
 int main (int argc, char *argv[])
 {
-  vtkSmartPointer<vtkPolyData> input;
+  vtkSmartPointer<vtkPolyData> input =
+    vtkSmartPointer<vtkPolyData>::New();
   std::string outputFilename;
 
   // Verify command line arguments
@@ -55,7 +56,7 @@ int main (int argc, char *argv[])
     }
 
   vtkSmartPointer<vtkOBJWriter> writer = 
-      vtkSmartPointer<vtkOBJWriter>::New();
+    vtkSmartPointer<vtkOBJWriter>::New();
   writer->SetInputData(input);
   writer->SetFileName(outputFilename.c_str());
   writer->Update();
