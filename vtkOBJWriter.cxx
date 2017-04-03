@@ -192,7 +192,7 @@ int vtkOBJWriter::RequestData(vtkInformation *vtkNotUsed(request),
           {
           if (tcoords)
             {
-            fout << static_cast<int>(indx[i])+idStart << " " << static_cast<int>(indx[i]) + idStart << " ";
+            fout << static_cast<int>(indx[i])+idStart << "/" << static_cast<int>(indx[i]) + idStart << " ";
             }
           else
             {
