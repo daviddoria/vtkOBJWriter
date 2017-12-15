@@ -32,7 +32,7 @@ class vtkOBJWriter : public vtkPolyDataAlgorithm
 {
 public:
   static vtkOBJWriter *New();
-  vtkTypeMacro(vtkOBJWriter,vtkPolyDataAlgorithm);
+  vtkTypeMacro(vtkOBJWriter,vtkPolyDataAlgorithm)
   void PrintSelf(ostream& os, vtkIndent indent);
 
   // Description:

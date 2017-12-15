@@ -47,7 +47,7 @@
 #include "vtkInformationVector.h"
 #include "vtkInformation.h"
 
-vtkStandardNewMacro(vtkOBJWriter);
+vtkStandardNewMacro(vtkOBJWriter)
 
 vtkOBJWriter::vtkOBJWriter()
 {
